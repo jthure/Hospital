@@ -15,6 +15,7 @@ import java.security.cert.*;
  * the firewall by following SSLSocketClientWithTunneling.java.
  */
 public class Client {
+    private static String certPath = "certificates/";
 
     public static void main(String[] args) throws Exception {
         String host = null;
@@ -43,8 +44,8 @@ public class Client {
                 KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
                 TrustManagerFactory tmf = TrustManagerFactory.getInstance("SunX509");
                 SSLContext ctx = SSLContext.getInstance("TLS");
-                ks.load(new FileInputStream("clientkeystore"), password);  // keystore password (storepass)
-				ts.load(new FileInputStream("clienttruststore"), password); // truststore password (storepass);
+                ks.load(new FileInputStream(certPath+"clientkeystore"), password);  // keystore password (storepass)
+				ts.load(new FileInputStream(certPath+"clienttruststore"), password); // truststore password (storepass);
 				kmf.init(ks, password); // user password (keypass)
 				tmf.init(ts); // keystore can be used as truststore here
 				ctx.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
