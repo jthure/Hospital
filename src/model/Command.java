@@ -10,6 +10,10 @@ public abstract class Command {
 	public Command(String[] command){
 		this.command=command;
 	}
+	
+	public void invalidArguments(String commandName) throws InvalidCommandException{
+		throw new InvalidCommandException("Error: "+commandName+"should be of length "+LENGTH);
+	}
 
 	@Override
 	public String toString(){
