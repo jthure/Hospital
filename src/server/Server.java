@@ -9,7 +9,7 @@ import javax.security.cert.X509Certificate;
 public class Server implements Runnable {
     private ServerSocket serverSocket = null;
     private static int numConnectedClients = 0;
-    private static String certPath = "certificates/";
+    private static String certPath = "certificates/Server/";
 
     public Server(ServerSocket ss) throws IOException {
         serverSocket = ss;
@@ -86,8 +86,8 @@ public class Server implements Runnable {
 				KeyStore ts = KeyStore.getInstance("JKS");
                 char[] password = "password".toCharArray();
 
-                ks.load(new FileInputStream(certPath+"serverkeystore"), password);  // keystore password (storepass)
-                ts.load(new FileInputStream(certPath+"servertruststore"), password); // truststore password (storepass)
+                ks.load(new FileInputStream(certPath+"server_keystore"), password);  // keystore password (storepass)
+                ts.load(new FileInputStream(certPath+"server_truststore"), password); // truststore password (storepass)
                 kmf.init(ks, password); // certificate password (keypass)
                 tmf.init(ts);  // possible to use keystore as truststore here
                 ctx.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
