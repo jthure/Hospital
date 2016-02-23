@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class JournalDB {
 
-    List<Journal> journals;
+
 
     public JournalDB() {
 
