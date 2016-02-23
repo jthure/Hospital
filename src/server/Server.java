@@ -29,29 +29,28 @@ public class Server implements Runnable {
 			newListener();
 			SSLSession session = socket.getSession();
 			X509Certificate cert = (X509Certificate) session.getPeerCertificateChain()[0];
-			numConnectedClients++;	
+			numConnectedClients++;
 			String subject = cert.getSubjectDN().getName();
 			String[] info = new String[] { subject.split("CN=")[1].split(",")[0], subject.split("O=")[1].split(",")[0],
-			subject.split("OU=")[1].split(",")[0] };
+					subject.split("OU=")[1].split(",")[0] };
 			User user = null;
 			switch (info[1]) {
-				case ("Doctor"):
-					user = new Doctor(info[0], info[2]);
-					break;
-				case ("Nurse"):
-					user = new Nurse(info[0], info[2]);
-					break;
-				case ("Patient"):
-					user = new Patient(info[0]);
-					break;
-				case ("Authority"):
-					user = new Authority(info[0]);
-					break;
-				default:
-					throw new InvalidUserException("Invalid user type in certificate");
-				
+			case ("Doctor"):
+				user = new Doctor(info[0], info[2]);
+				break;
+			case ("Nurse"):
+				user = new Nurse(info[0], info[2]);
+				break;
+			case ("Patient"):
+				user = new Patient(info[0]);
+				break;
+			case ("Authority"):
+				user = new Authority(info[0]);
+				break;
+			default:
+				throw new InvalidUserException("Invalid user type in certificate");
+
 			}
-			
 
 			System.out.println("client connected");
 			System.out.println("client name (cert subject DN field): " + subject);
@@ -64,10 +63,10 @@ public class Server implements Runnable {
 
 			String clientMsg = null;
 			while ((clientMsg = in.readLine()) != null) {
-				String rev = new StringBuilder(clientMsg).reverse().toString();
+
 				System.out.println("received '" + clientMsg + "' from client");
-				System.out.print("sending '" + rev + "' to client...");
-				out.println(rev);
+				System.out.print("sending '" + "Recieved commando: " + clientMsg + "' to client...");
+				out.println("Recieved commando: " + clientMsg);
 				out.flush();
 				System.out.println("done\n");
 			}
