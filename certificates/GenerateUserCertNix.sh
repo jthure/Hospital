@@ -12,3 +12,4 @@ keytool -importcert -alias ca -keystore $certpath/$keystore -file CA/CA.crt -sto
 keytool -importcert -alias $username -keystore $certpath/$keystore -file $certpath/$username.crt -storepass $pass 
 #keytool -list -v -keystore $certpath/$keystore -storepass $pass
 keytool -import -alias ca -keystore $certpath/$truststore -file CA/CA.crt -storepass $pass -noprompt
+rm $certpath/$username.crt $certpath/$username.csr

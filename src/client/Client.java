@@ -16,7 +16,7 @@ import java.security.cert.*;
  */
 public class Client {
     private static String certPath = "certificates/User/";
-    private static String user = "Jack";
+    private static String user="no_user";
 
     public static void main(String[] args) throws Exception {
         String host = null;
@@ -25,12 +25,13 @@ public class Client {
             System.out.println("args[" + i + "] = " + args[i]);
         }
         if (args.length < 2) {
-            System.out.println("USAGE: java client host port");
+            System.out.println("USAGE: java client host port username");
             System.exit(-1);
         }
         try { /* get input parameters */
             host = args[0];
             port = Integer.parseInt(args[1]);
+            user= args[2];
         } catch (IllegalArgumentException e) {
             System.out.println("USAGE: java client host port");
             System.exit(-1);
