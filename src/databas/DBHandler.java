@@ -28,11 +28,21 @@ public class DBHandler {
 		}
 		
 		if(wanted.length() == 10){
+			readByPnr(wanted);
+		}
+		else{
 			
 		}
 		
 		return null;
 	}
+	
+	public ArrayList<Journal> readByPnr(String pNr){
+		
+		return null;
+	}
+	
+	
 
 			
 	
