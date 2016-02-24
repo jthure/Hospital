@@ -1,0 +1,2 @@
+Pnr;id;name;division;doctor;nurse;data
+9302213138;1;Alexander Arcombe;gynikolog;Jonas;Salas;Alexander har kli
