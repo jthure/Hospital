@@ -11,6 +11,7 @@ import java.security.KeyStore;
 import javax.net.ServerSocketFactory;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLPeerUnverifiedException;
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
 import javax.net.ssl.SSLSession;
@@ -26,6 +27,7 @@ import model.InvalidCommandException;
 import model.Nurse;
 import model.Patient;
 import model.User;
+import databas.Logger;
 
 public class Server implements Runnable {
 	private ServerSocket serverSocket = null;
@@ -43,10 +45,14 @@ public class Server implements Runnable {
 			newListener();
 			SSLSession session = socket.getSession();
 			X509Certificate cert = (X509Certificate) session.getPeerCertificateChain()[0];
+			
 			numConnectedClients++;
 			String subject = cert.getSubjectDN().getName();
+			
 			String[] info = new String[] { subject.split("CN=")[1].split(",")[0], subject.split("O=")[1].split(",")[0],
 					subject.split("OU=")[1].split(",")[0] };
+			Logger.loginEvent(info[0], info[1], info[2]);
+			
 			User user = null;
 			switch (info[1]) {
 			case ("Doctor"):
@@ -63,6 +69,7 @@ public class Server implements Runnable {
 				break;
 			default:
 				throw new InvalidUserException("Invalid user type in certificate");
+				// Log
 
 			}
 
@@ -86,12 +93,12 @@ public class Server implements Runnable {
 					e.printStackTrace();
 				}
 				if (cmd != null) {
-					Response response= getData(user, cmd);
+					Response response = getData(user, cmd);
 					out.println("Recieved commando: " + clientMsg);
 					out.flush();
 					System.out.println("done\n");
-				}else{
-					
+				} else {
+
 				}
 			}
 			in.close();
@@ -100,6 +107,8 @@ public class Server implements Runnable {
 			numConnectedClients--;
 			System.out.println("client disconnected");
 			System.out.println(numConnectedClients + " concurrent connection(s)\n");
+		} catch (SSLPeerUnverifiedException e) {
+
 		} catch (IOException e) {
 			System.out.println("Client died: " + e.getMessage());
 			e.printStackTrace();
@@ -109,9 +118,10 @@ public class Server implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	private Response getData(User user, Command cmd){
-		boolean allowed=user.checkCommandPermission(cmd);
-		if(!allowed){
+
+	private Response getData(User user, Command cmd) {
+		boolean allowed = user.checkCommandPermission(cmd);
+		if (!allowed) {
 			return new AccessDeniedResponse();
 		}
 		return new JournalResponse(null);
@@ -123,6 +133,8 @@ public class Server implements Runnable {
 
 	public static void main(String args[]) {
 		System.out.println("\nServer Started\n");
+		Logger.init();
+		Logger.log("Server started");
 		int port = -1;
 		if (args.length >= 1) {
 			port = Integer.parseInt(args[0]);

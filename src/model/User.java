@@ -1,5 +1,6 @@
 package model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import model.Command.Commands;
@@ -13,6 +14,7 @@ public abstract class User {
 	protected List<Commands> permittedCommands;
 
 	public User(String name, String divison) {
+		permittedCommands = new LinkedList<>();
 		this.name = name;
 		this.division = divison;
 	}

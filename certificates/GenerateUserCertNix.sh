@@ -1,7 +1,7 @@
 #!/bin/sh
 echo type username
 read username
-echo type username
+echo type division
 read division
 echo type type
 read type
