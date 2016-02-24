@@ -8,5 +8,10 @@ public class CommandDelete extends Command {
 		if(command.length!=LENGTH)
 			invalidArguments("Delete");
 	}
+
+	@Override
+	Commands getCommand() {
+		return Commands.DELETE;
+	}
 	
 }

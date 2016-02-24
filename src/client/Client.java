@@ -98,7 +98,6 @@ public class Client {
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-			CommandFactory cmdFactory = new CommandFactory();
 			String msg;
 			for (;;) {
 				System.out.print(">");
@@ -108,7 +107,7 @@ public class Client {
 				}
 				Command cmd = null;
 				try {
-					cmd = cmdFactory.createCommand(msg);
+					cmd = CommandFactory.createCommand(msg);
 				} catch (InvalidCommandException e) {
 					System.out.println(e.getMessage());
 				}

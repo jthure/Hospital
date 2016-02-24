@@ -1,14 +1,28 @@
 package server;
 
-import java.io.*;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
 import java.security.KeyStore;
-import javax.net.*;
-import javax.net.ssl.*;
+
+import javax.net.ServerSocketFactory;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLServerSocketFactory;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.TrustManagerFactory;
 import javax.security.cert.X509Certificate;
 
 import model.Authority;
+import model.Command;
+import model.CommandFactory;
 import model.Doctor;
+import model.InvalidCommandException;
 import model.Nurse;
 import model.Patient;
 import model.User;
@@ -53,7 +67,7 @@ public class Server implements Runnable {
 			}
 
 			System.out.println("client connected");
-			System.out.println("client name (cert subject DN field): " + subject);
+			System.out.println("User info > " + user.info());
 			System.out.println(numConnectedClients + " concurrent connection(s)\n");
 
 			PrintWriter out = null;
@@ -63,12 +77,22 @@ public class Server implements Runnable {
 
 			String clientMsg = null;
 			while ((clientMsg = in.readLine()) != null) {
-
 				System.out.println("received '" + clientMsg + "' from client");
-				System.out.print("sending '" + "Recieved commando: " + clientMsg + "' to client...");
-				out.println("Recieved commando: " + clientMsg);
-				out.flush();
-				System.out.println("done\n");
+				Command cmd = null;
+				try {
+					cmd = CommandFactory.createCommand(clientMsg);
+				} catch (InvalidCommandException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (cmd != null) {
+					Response response= getData(user, cmd);
+					out.println("Recieved commando: " + clientMsg);
+					out.flush();
+					System.out.println("done\n");
+				}else{
+					
+				}
 			}
 			in.close();
 			out.close();
@@ -84,6 +108,13 @@ public class Server implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	private Response getData(User user, Command cmd){
+		boolean allowed=user.checkCommandPermission(cmd);
+		if(!allowed){
+			return new AccessDeniedResponse();
+		}
+		return new JournalResponse(null);
 	}
 
 	private void newListener() {

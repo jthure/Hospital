@@ -6,7 +6,12 @@ public class CommandRead extends Command {
 		super(command);
 		LENGTH=3;
 		if(command.length!=LENGTH)
-			invalidArguments("Read");;
+			invalidArguments("Read");
+	}
+
+	@Override
+	Commands getCommand() {
+		return Commands.READ;
 	}
 	
 }

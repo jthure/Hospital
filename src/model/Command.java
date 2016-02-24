@@ -25,4 +25,12 @@ public abstract class Command {
 		sb.deleteCharAt(sb.length()-1);
 		return sb.toString();
 	}
+	
+	abstract Commands getCommand();
+	
+	enum Commands{
+		READ,WRITE,DELETE,CREATE
+	}
+
+	
 }

@@ -8,5 +8,10 @@ public class CommandAdd extends Command {
 		if(command.length!=LENGTH)
 			invalidArguments("Add");
 	}
+
+	@Override
+	Commands getCommand() {
+		return Commands.CREATE;
+	}
 	
 }

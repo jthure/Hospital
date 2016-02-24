@@ -2,7 +2,7 @@ package model;
 
 public class CommandFactory {
 
-	public Command createCommand(String command) throws InvalidCommandException {
+	public static Command createCommand(String command) throws InvalidCommandException {
 		String[] commandComps = command.split(" ");
 		switch (commandComps[0]) {
 		case ("add"):
