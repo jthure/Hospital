@@ -27,3 +27,5 @@
 2016-02-29_11:19:50	Server started
 2016-02-29_11:45:49	Server started
 2016-02-29_11:45:56	LoginEvent: Username: Jonas Type: Doctor Division: Surgery
+2016-02-29_13:49:58	Server started
+2016-02-29_13:50:08	LoginEvent: Username: d2 Type: Doctor Division: d1
