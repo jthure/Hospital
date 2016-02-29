@@ -12,6 +12,8 @@ import java.util.Scanner;
 
 import com.sun.javafx.geom.transform.GeneralTransform3D;
 
+import model.User;
+
 public class DBHandler {
 	
 	HashMap<String, Journal> map;
@@ -109,12 +111,17 @@ public class DBHandler {
 		return true;
 	}
 	
-	public void write(String id, String data, boolean append){
+	public boolean write(String id, String data, User user , boolean append){
 		Journal j = map.get(id);
 		if (j != null){
-			j.write(data, append);
-		}
+			
+		} else if(user.getType() == "Doctor"){
+			if (j.getDoctor() == user.getName()) {
+				j.write(data, append);
+			}
+		} 
 		updateDB();
+		return false;
 	}
 	
 	public boolean delete(String id){

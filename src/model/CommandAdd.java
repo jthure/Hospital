@@ -51,7 +51,7 @@ public class CommandAdd extends Command {
 	}
 
 	@Override
-	public String execute(DBHandler dbh)  throws IOException{
+	public String execute(DBHandler dbh,User user)  throws IOException{
 		boolean result = dbh.add(new Journal(command[1], command[2], command[3], command[4], command[5], command[6]));
 		if(result)
 			return "Journal successfully added";

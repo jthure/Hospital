@@ -34,7 +34,7 @@ public abstract class User {
 	public String getDivision() {
 		return name;
 	}
-
+	
 	public String info() {
 		StringBuilder sb = new StringBuilder();
 		return sb.append("Name: ").append(name).append(", ").

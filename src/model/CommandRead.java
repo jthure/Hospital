@@ -21,7 +21,7 @@ public class CommandRead extends Command {
 		return Commands.READ;
 	}
 
-	public String execute(DBHandler dbh)  throws IOException{
+	public String execute(DBHandler dbh, User user)  throws IOException{
 		if(command[1].length()==10)
 			return listOfJournalsToString(dbh.readByPnr(command[1]));
 		else

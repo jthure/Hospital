@@ -35,8 +35,7 @@ public class Server implements Runnable {
 	private static int numConnectedClients = 0;
 	private static String certPath = "certificates/Server/";
 	private static DBHandler db = new DBHandler();
-	
-	
+
 	public Server(ServerSocket ss) throws IOException {
 		serverSocket = ss;
 		newListener();
@@ -48,14 +47,14 @@ public class Server implements Runnable {
 			newListener();
 			SSLSession session = socket.getSession();
 			X509Certificate cert = (X509Certificate) session.getPeerCertificateChain()[0];
-			
+
 			numConnectedClients++;
 			String subject = cert.getSubjectDN().getName();
-			
+
 			String[] info = new String[] { subject.split("CN=")[1].split(",")[0], subject.split("O=")[1].split(",")[0],
 					subject.split("OU=")[1].split(",")[0] };
 			Logger.loginEvent(info[0], info[1], info[2]);
-			
+
 			User user = null;
 			switch (info[1]) {
 			case ("Doctor"):
@@ -96,8 +95,8 @@ public class Server implements Runnable {
 					e.printStackTrace();
 				}
 				if (cmd != null) {
-					Response response = getData(user, cmd);
-					out.println("Server response: " + response.response());
+					String response = getData(user, cmd);
+					out.println("Server response: " + response);
 					out.flush();
 					System.out.println("done\n");
 				} else {
@@ -122,13 +121,13 @@ public class Server implements Runnable {
 		}
 	}
 
-	private Response getData(User user, Command cmd) {
+	private String getData(User user, Command cmd) {
 		boolean allowed = user.checkCommandPermission(cmd);
 		if (!allowed) {
-			return new AccessDeniedResponse();
+			return "Access denied";
 		}
-		
-		return new JournalResponse(cmd, db);
+
+		return cmd.execute(db, user);
 	}
 
 	private void newListener() {

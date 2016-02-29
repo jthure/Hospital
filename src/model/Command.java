@@ -48,7 +48,7 @@ public abstract class Command {
 		return sb.toString();
 	}
 
-	public abstract String execute(DBHandler dbh)  throws IOException;
+	public abstract String execute(DBHandler dbh,User user)  throws IOException;
 
 	
 }

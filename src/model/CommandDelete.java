@@ -20,7 +20,7 @@ public class CommandDelete extends Command {
 	}
 	
 	//ToDo
-	public String execute(DBHandler dbh)  throws IOException{
+	public String execute(DBHandler dbh, User user)  throws IOException{
 		boolean result = dbh.delete(command[1]);
 		if(result)
 			return "Journal with id: "+command[1]+" was deleted";
