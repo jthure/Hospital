@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 import com.sun.javafx.geom.transform.GeneralTransform3D;
 
+import model.Doctor;
 import model.User;
 
 public class DBHandler {
@@ -65,17 +66,17 @@ public class DBHandler {
 //		return map;
 //	}
 	
-	public ArrayList<Journal> read(String wanted){
+	public ArrayList<Journal> read(String wanted, User user){
 		
 		if(wanted.length() == 10){
-			return readByPnr(wanted);
+			return readByPnr(wanted, user);
 		}
 		else{
-			return readById(wanted);
+			return readById(wanted, user);
 		}
 	}
 	
-	public ArrayList<Journal> readByPnr(String pNr){
+	public ArrayList<Journal> readByPnr(String pNr, User user){
 		journalList.clear();
 		for(Journal j : map.values()){
 			if (pNr.equals(j.getPnr())){
@@ -86,10 +87,11 @@ public class DBHandler {
 		return journalList;
 	}
 	
-	public ArrayList<Journal> readById(String id){
+	public ArrayList<Journal> readById(String id, User user){
 		Journal journal = map.get(id);
 		journalList.clear();
 		if(journal != null){
+			if()
 			journalList.add(journal);
 			return journalList;
 		}

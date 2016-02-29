@@ -30,14 +30,15 @@ public class CommandAdd extends Command {
 		info[1] = scan.nextLine();
 		System.out.print("Name of patient: ");
 		info[2] = scan.nextLine();
-		System.out.println("Division: ");
+		System.out.print("Division: ");
 		info[3] = scan.nextLine();
-		System.out.println("Doctor: ");
+		System.out.print("Doctor: ");
 		info[4] = scan.nextLine();
-		System.out.println("Nurse: ");
+		System.out.print("Nurse: ");
 		info[5] = scan.nextLine();
-		System.out.println("Data: ");
+		System.out.print("Data: ");
 		info[6] = scan.nextLine();
+		scan.close();
 		return info;
 	}
 	
