@@ -97,7 +97,7 @@ public class Server implements Runnable {
 				if (cmd != null) {
 					Logger.commandEntered(user.getName(), clientMsg);
 					String response = getData(user, cmd);
-					out.println("Server response: " + response);
+					out.println(response);
 					out.flush();
 					System.out.println("done\n");
 				} else {

@@ -17,6 +17,7 @@ import com.sun.javafx.geom.transform.GeneralTransform3D;
 import model.Authority;
 import model.Doctor;
 import model.Nurse;
+import model.Patient;
 import model.User;
 
 public class DBHandler {
@@ -64,6 +65,7 @@ public class DBHandler {
 		for (Journal j : map.values()) {
 			pw.println(j.toString());
 		}
+		pw.close();
 	}
 
 
@@ -106,12 +108,15 @@ public class DBHandler {
 		
 		if (user.getDivision().equals(journal.getDivision()))
 			return true;
-		else if(user.getType() == Doctor.class.getSimpleName() && user.getName().equals(journal.getDoctor()))
+		else if(user.getType().equals(Doctor.class.getSimpleName()) && user.getName().equals(journal.getDoctor()))
 			return true;
-		else if(user.getType() == Nurse.class.getSimpleName() && user.getName().equals(journal.getNurse()))
+		else if(user.getType().equals(Nurse.class.getSimpleName()) && user.getName().equals(journal.getNurse()))
 			return true;
-		else if(user.getType() == Authority.class.getSimpleName())
+		else if(user.getType().equals(Patient.class.getSimpleName()) && user.getName().equals(journal.getName()))
 			return true;
+		else if(user.getType().equals(Authority.class.getSimpleName()))
+			return true;
+		
 		return false;
 	}
 
@@ -134,7 +139,7 @@ public class DBHandler {
 		Journal j = map.get(id);
 		if (j == null) {
 			return false;
-		} else if (user.getType() == Doctor.class.getSimpleName()) {
+		} else if (user.getType().equals(Doctor.class.getSimpleName())) {
 			if (j.getDoctor().equals(user.getName())) {
 				j.write(data, append);
 				updateDB();

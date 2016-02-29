@@ -12,7 +12,8 @@ public class CommandWrite extends Command {
 	public CommandWrite(String[] command) throws InvalidCommandException{
 		super(command);
 		LENGTH=4;
-		super.command=setInfo();
+		if(command.length != LENGTH)
+			super.command=setInfo();
 		
 		if(super.command.length!=LENGTH)
 			invalidArguments("Write");

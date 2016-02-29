@@ -28,7 +28,6 @@ public class CommandRead extends Command {
 		info[0] = "read";
 		System.out.print("Name or pnr of patient: ");
 		info[1] = scan.nextLine();
-		scan.close();
 		return info;
 		
 	}
@@ -39,7 +38,7 @@ public class CommandRead extends Command {
 	}
 
 	public String execute(DBHandler dbh, User user)  throws IOException{
-		return listOfJournalsToString(dbh.read(command[1], user));
+		return listOfJournalsToString(dbh.read(command[1], user)).replace(";", " ");
 	
 	}
 }

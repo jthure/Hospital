@@ -126,8 +126,10 @@ public class Client {
 					out.println(cmd.toString());
 					out.flush();
 					System.out.println("done");
-					
-					System.out.println("received '" + in.readLine() + "' from server\n");
+					System.out.println("Server response:");
+					do{
+						System.out.println(in.readLine());
+					}while(in.ready());
 				}
 				
 			}

@@ -26,7 +26,6 @@ public class CommandDelete extends Command {
 		info[0] = "delete";
 		System.out.print("Journal id: ");
 		info[1] = scan.nextLine();
-		scan.close();
 		return info;
 	}
 	

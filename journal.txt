@@ -1,6 +1,3 @@
 Pnr;id;name;division;doctor;nurse;data
-9302213138;1;Alexander Arcombe;gynikolog;Jonas;Salas;Alexander har kli
-0402213138;2;Jonas Thuresson;Salas;barnmotagningen;Alexander;Jonas har problem med alkoholen
-0402213138;3;Jonas Thuresson;Salas;barnmotagningen;Alexander;Jonas måste skickas till rehab
-9302313138;4;asd;asd;asd;asd;asd
-9203948575;5;dsfggfd;dfhhgf;fdhdf;fhdf;hgfhd gfhdfh fgh
+9202192978;1;Patient1;Division1;Doctor1;Nurse1;han har kli + Kan vara HIV
+9202192978;2;Patient1;Division1;Doctor1;Nurse2;han är botad

@@ -11,7 +11,7 @@ public class CommandAdd extends Command {
 	
 	public CommandAdd(String[] command) throws InvalidCommandException{
 		super(command);
-		LENGTH=7;
+		LENGTH=6;
 		if(command.length!=LENGTH)
 			super.command = setInfo();
 		
@@ -30,11 +30,11 @@ public class CommandAdd extends Command {
 		info[1] = scan.nextLine();
 		System.out.print("Name of patient: ");
 		info[2] = scan.nextLine();
-		System.out.println("Doctor: ");
+		System.out.print("Doctor: ");
 		info[3] = scan.nextLine();
-		System.out.println("Nurse: ");
+		System.out.print("Nurse: ");
 		info[4] = scan.nextLine();
-		System.out.println("Data: ");
+		System.out.print("Data: ");
 		info[5] = scan.nextLine();
 		return info;
 	}
@@ -50,7 +50,7 @@ public class CommandAdd extends Command {
 
 	@Override
 	public String execute(DBHandler dbh,User user)  throws IOException{
-		boolean result = dbh.add(new Journal(command[1], command[2], user.getDivision(), command[4], command[5], command[6]));
+		boolean result = dbh.add(new Journal(command[1], command[2], user.getDivision(), command[3], command[4], command[5]));
 		if(result)
 			return "Journal successfully added";
 		return "Journal was not added";

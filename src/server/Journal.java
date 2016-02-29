@@ -15,7 +15,7 @@ public class Journal {
 	private String nurse = null;
 	private String data = null;
 	
-	public Journal(String pNr, String name, String doctor, String nurse, String division, String data){
+	public Journal(String pNr, String name, String division, String doctor, String nurse, String data){
 		this.pNr = pNr;
 		this.doctor = doctor;
 		this.nurse = nurse;
@@ -58,7 +58,7 @@ public class Journal {
 	
 	public void write(String data, boolean append){
 		if(append){
-			this.data = this.data + ";" + data;
+			this.data = this.data + " + " + data;
 		}else {
 			this.data = data;
 		}
@@ -79,6 +79,10 @@ public class Journal {
 	
 	public String getPnr() {
 		return pNr;
+	}
+	
+	public String getName(){
+		return name;
 	}
 	
 	public String getDoctor(){

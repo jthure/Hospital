@@ -12,7 +12,8 @@ public class CommandFactory {
 			return new CommandDelete(commandComps);
 		case ("read"):
 			return new CommandRead(commandComps);
-
+		case ("write"):
+			return new CommandWrite(commandComps);
 		default:
 			throw new InvalidCommandException("Invalid command entered");
 		}

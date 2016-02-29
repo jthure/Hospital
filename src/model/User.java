@@ -32,7 +32,7 @@ public abstract class User {
 	}
 
 	public String getDivision() {
-		return name;
+		return division;
 	}
 	
 	public String info() {
