@@ -81,6 +81,14 @@ public class Journal {
 		return pNr;
 	}
 	
+	public String getDoctor(){
+		return doctor;
+	}
+	
+	public String getNurse(){
+		return nurse;
+	}
+	
 	public String getId(){
 		return id;
 	}

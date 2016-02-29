@@ -27,9 +27,9 @@ public class CommandWrite extends Command {
 	}
 
 	@Override
-	public String execute(DBHandler dbh)  throws IOException{
+	public String execute(DBHandler dbh, User user)  throws IOException{
 		boolean append = Boolean.parseBoolean(command[3]);
-		boolean result = dbh.write(command[1], command[2], append);
+		boolean result = dbh.write(command[1], command[2], user, append);
 		if(result)
 			return "Journal successfully added";
 		return "Journal was not added";

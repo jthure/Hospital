@@ -11,12 +11,12 @@ public class JournalResponse extends Response {
 	
 	
 	public JournalResponse(Command cmd, DBHandler dbh) {
-		try {
-			msg=cmd.execute(dbh);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			//msg=cmd.execute(dbh);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 	}
 
