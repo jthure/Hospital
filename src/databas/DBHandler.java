@@ -1,6 +1,8 @@
 package databas;
 
 import server.Journal;
+import server.JournalResponse;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,7 +14,9 @@ import java.util.Scanner;
 
 import com.sun.javafx.geom.transform.GeneralTransform3D;
 
+import model.Authority;
 import model.Doctor;
+import model.Nurse;
 import model.User;
 
 public class DBHandler {
@@ -62,38 +66,53 @@ public class DBHandler {
 		}
 	}
 
-	// public HashMap<String, Journal> getMap(){
-	// return map;
-	// }
 
-	public ArrayList<Journal> read(String wanted) {
+	
+	public ArrayList<Journal> read(String wanted, User user){
+		
+		if(wanted.length() == 10){
+			return readByPnr(wanted, user);
+		}
+		else{
+			return readById(wanted, user);
 
-		if (wanted.length() == 10) {
-			return readByPnr(wanted);
-		} else {
-			return readById(wanted);
 		}
 	}
+	
 
-	public ArrayList<Journal> readByPnr(String pNr) {
+	
+	public ArrayList<Journal> readByPnr(String pNr, User user){
+
 		journalList.clear();
 		for (Journal j : map.values()) {
-			if (pNr.equals(j.getPnr())) {
+			if (pNr.equals(j.getPnr()) && checkPremissionToRead(j, user)) {
 				journalList.add(j);
 			}
 		}
-
 		return journalList;
 	}
 
-	public ArrayList<Journal> readById(String id) {
+	public ArrayList<Journal> readById(String id, User user){
+
 		Journal journal = map.get(id);
 		journalList.clear();
-		if (journal != null) {
+		if(journal != null && checkPremissionToRead(journal, user)){
 			journalList.add(journal);
-			return journalList;
 		}
-		return null;
+		return journalList;
+	}
+	
+	private boolean checkPremissionToRead(Journal journal, User user){
+		
+		if (user.getDivision().equals(journal.getDivision()))
+			return true;
+		else if(user.getType() == Doctor.class.getSimpleName() && user.getName().equals(journal.getDoctor()))
+			return true;
+		else if(user.getType() == Nurse.class.getSimpleName() && user.getName().equals(journal.getNurse()))
+			return true;
+		else if(user.getType() == Authority.class.getSimpleName())
+			return true;
+		return false;
 	}
 
 	public boolean add(Journal journal) throws IOException {
@@ -131,8 +150,12 @@ public class DBHandler {
 		return false;
 	}
 
+
 	public boolean delete(String id) {
-		return map.remove(id) != null ? true : false;
+		boolean result = map.remove(id) != null ? true : false;
+		if (result)
+			updateDB();
+		return result;
 	}
 
 	// public static void main(String[] args) throws IOException{

@@ -93,6 +93,10 @@ public class Journal {
 		return id;
 	}
 	
+	public String getDivision(){
+		return division;
+	}
+	
 	public static void main(String[] args){
 		PrintWriter pw = null;
 		try {
