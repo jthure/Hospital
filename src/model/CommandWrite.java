@@ -12,11 +12,23 @@ public class CommandWrite extends Command {
 	public CommandWrite(String[] command) throws InvalidCommandException{
 		super(command);
 		LENGTH=4;
-		
+		super.command=setInfo();
 		
 		if(super.command.length!=LENGTH)
 			invalidArguments("Write");
 		
+	}
+	private String[] setInfo(){
+		Scanner scan = new Scanner(System.in);
+		String[] info = new String[LENGTH];
+		info[0] = "write";
+		System.out.print("Journal ID: ");
+		info[1] = scan.nextLine();
+		System.out.print("Data: ");
+		info[2] = scan.nextLine();
+		System.out.println("Append? (true/false): ");
+		info[3] = scan.nextLine();
+		return info;
 	}
 
 

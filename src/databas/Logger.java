@@ -40,6 +40,18 @@ public class Logger {
 
 	public static void loginEvent(String user, String type, String division) {
 
-		log("LoginEvent: " + "Username: " + user + " Type: " + type + " Division: " + division);
+		log("LoginEvent:\t" + "Username: " + user + " Type: " + type + " Division: " + division);
+	}
+	public static void userDisconnected(String user, String type, String division) {
+
+		log("UserDisconnected:\t" + "Username: " + user + " Type: " + type + " Division: " + division);
+	}
+	public static void commandEntered(String user, String command) {
+
+		log("Command:\t" + "Username: " + user + " Command: " + command);
+	}
+	public static void invalidCommandEntered(String user, String command) {
+
+		log("InvalidCommand:\t" + "Username: " + user + " Command: " + command);
 	}
 }

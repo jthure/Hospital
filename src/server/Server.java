@@ -56,17 +56,17 @@ public class Server implements Runnable {
 			Logger.loginEvent(info[0], info[1], info[2]);
 
 			User user = null;
-			switch (info[1]) {
-			case ("Doctor"):
+			switch (info[1].toLowerCase()) {
+			case ("doctor"):
 				user = new Doctor(info[0], info[2]);
 				break;
-			case ("Nurse"):
+			case ("nurse"):
 				user = new Nurse(info[0], info[2]);
 				break;
-			case ("Patient"):
+			case ("patient"):
 				user = new Patient(info[0]);
 				break;
-			case ("Authority"):
+			case ("authority"):
 				user = new Authority(info[0]);
 				break;
 			default:
@@ -91,10 +91,11 @@ public class Server implements Runnable {
 				try {
 					cmd = CommandFactory.createCommand(clientMsg);
 				} catch (InvalidCommandException e) {
-					// TODO Auto-generated catch block
+					Logger.invalidCommandEntered(user.getName(), clientMsg);
 					e.printStackTrace();
 				}
 				if (cmd != null) {
+					Logger.commandEntered(user.getName(), clientMsg);
 					String response = getData(user, cmd);
 					out.println("Server response: " + response);
 					out.flush();
@@ -107,6 +108,7 @@ public class Server implements Runnable {
 			out.close();
 			socket.close();
 			numConnectedClients--;
+			Logger.userDisconnected(user.getName(), user.getType(), user.getDivision());
 			System.out.println("client disconnected");
 			System.out.println(numConnectedClients + " concurrent connection(s)\n");
 		} catch (SSLPeerUnverifiedException e) {
