@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 import com.sun.javafx.geom.transform.GeneralTransform3D;
 
+import model.Authority;
 import model.Doctor;
 import model.Nurse;
 import model.User;
@@ -109,6 +110,8 @@ public class DBHandler {
 			return true;
 		else if(user.getType() == Nurse.class.getSimpleName() && user.getName().equals(journal.getNurse()))
 			return true;
+		else if(user.getType() == Authority.class.getSimpleName())
+			return true;
 		return false;
 	}
 
@@ -149,7 +152,10 @@ public class DBHandler {
 
 
 	public boolean delete(String id) {
-		return map.remove(id) != null ? true : false;
+		boolean result = map.remove(id) != null ? true : false;
+		if (result)
+			updateDB();
+		return result;
 	}
 
 	// public static void main(String[] args) throws IOException{
