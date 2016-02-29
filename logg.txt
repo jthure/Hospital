@@ -1,0 +1,26 @@
+2016-02-25_13:11:22	Server started
+2016-02-25_13:11:29	LoginEvent: Username: Jonas Type: Doctor Division: Surgery
+2016-02-25_13:13:11	LoginEvent: Username: Jonas Type: Doctor Division: Surgery
+2016-02-25_13:13:28	Server started
+2016-02-25_13:13:33	LoginEvent: Username: Jonas Type: Doctor Division: Surgery
+2016-02-25_13:13:58	Server started
+2016-02-25_13:14:05	LoginEvent: Username: Jonas Type: Doctor Division: Surgery
+2016-02-25_13:14:46	Server started
+2016-02-25_13:14:53	LoginEvent: Username: Jonas Type: Doctor Division: Surgery
+2016-02-25_13:16:05	Server started
+2016-02-25_13:16:10	LoginEvent: Username: Jonas Type: Doctor Division: Surgery
+2016-02-25_13:18:17	Server started
+2016-02-25_13:18:23	LoginEvent: Username: Jonas Type: Doctor Division: Surgery
+2016-02-25_13:19:28	Server started
+2016-02-25_13:19:32	LoginEvent: Username: Jonas Type: Doctor Division: Surgery
+2016-02-25_13:22:42	Server started
+2016-02-25_13:22:49	LoginEvent: Username: Jonas Type: Doctor Division: Surgery
+2016-02-25_13:26:37	Server started
+2016-02-25_13:26:42	LoginEvent: Username: Jonas Type: Doctor Division: Surgery
+2016-02-25_13:30:46	Server started
+2016-02-25_13:30:52	LoginEvent: Username: Jonas Type: Doctor Division: Surgery
+2016-02-25_13:32:45	Server started
+2016-02-25_13:33:01	LoginEvent: Username: Jonas Type: Doctor Division: Surgery
+2016-02-25_13:34:36	Server started
+2016-02-25_13:34:40	LoginEvent: Username: Jonas Type: Doctor Division: Surgery
+2016-02-25_13:40:12	LoginEvent: Username: Alexander Type: Patient Division: n/a
