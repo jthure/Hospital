@@ -127,7 +127,12 @@ public class Server implements Runnable {
 			return "Access denied";
 		}
 
-		return cmd.execute(db, user);
+		try {
+			return cmd.execute(db, user);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "Error accessing database";
+		}
 	}
 
 	private void newListener() {
