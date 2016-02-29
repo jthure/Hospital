@@ -1,8 +1,10 @@
 package model;
 
 import java.io.IOException;
+import java.util.List;
 
 import databas.DBHandler;
+import server.Journal;
 
 /**
  * Created by jonas on 2016-02-22.
@@ -34,6 +36,16 @@ public abstract class Command {
 	
 	enum Commands{
 		READ,WRITE,DELETE,CREATE
+	}
+	protected String listOfJournalsToString(List<Journal> journals){
+		StringBuilder sb = new StringBuilder();
+		for (Journal j : journals){
+			sb.append(j.toString()).append("\n");
+		}
+		if(sb.length()==0){
+			return "No records found. Either they don't exist or you don't have the permission to read them";
+		}
+		return sb.toString();
 	}
 
 	public abstract String execute(DBHandler dbh)  throws IOException;

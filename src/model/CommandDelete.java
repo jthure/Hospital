@@ -9,7 +9,7 @@ public class CommandDelete extends Command {
 
 	public CommandDelete(String[] command) throws InvalidCommandException {
 		super(command);
-		LENGTH=3;
+		LENGTH=2;
 		if(command.length!=LENGTH)
 			invalidArguments("Delete");
 	}
@@ -21,9 +21,9 @@ public class CommandDelete extends Command {
 	
 	//ToDo
 	public String execute(DBHandler dbh)  throws IOException{
-		boolean result = dbh.add(new Journal(command[1], command[2], command[3], command[4], command[5], command[6]));
+		boolean result = dbh.delete(command[1]);
 		if(result)
-			return "Journal successfully added";
-		return "Journal was not added";
+			return "Journal with id: "+command[1]+" was deleted";
+		return "Journal with id: "+command[1]+" could NOT be deleted";
 	}
 }

@@ -117,13 +117,8 @@ public class DBHandler {
 		updateDB();
 	}
 	
-	public ArrayList<Journal> delete(String id){
-		journalList.clear();
-		journalList.add(map.remove(id));
-		if(!journalList.isEmpty()){
-			updateDB();
-		}
-		return journalList;
+	public boolean delete(String id){
+		return map.remove(id)!=null?true:false;
 	}
 
 

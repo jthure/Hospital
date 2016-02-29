@@ -1,6 +1,8 @@
 package model;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import databas.DBHandler;
 import server.Journal;
@@ -9,7 +11,7 @@ public class CommandRead extends Command {
 
 	public CommandRead(String[] command) throws InvalidCommandException {
 		super(command);
-		LENGTH=3;
+		LENGTH=2;
 		if(command.length!=LENGTH)
 			invalidArguments("Read");
 	}
@@ -18,12 +20,12 @@ public class CommandRead extends Command {
 	Commands getCommand() {
 		return Commands.READ;
 	}
-	
-	//ToDo
+
 	public String execute(DBHandler dbh)  throws IOException{
-		boolean result = dbh.add(new Journal(command[1], command[2], command[3], command[4], command[5], command[6]));
-		if(result)
-			return "Journal successfully added";
-		return "Journal was not added";
+		if(command[1].length()==10)
+			return listOfJournalsToString(dbh.readByPnr(command[1]));
+		else
+			return listOfJournalsToString(dbh.readById(command[1]));
+	
 	}
 }
