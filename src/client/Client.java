@@ -1,6 +1,7 @@
 package client;
 
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -52,11 +53,19 @@ public class Client {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Please enter username.");
 		user = scanner.nextLine();
+		System.out.println("Please enter password.");
+		Console console = System.console();
+		String secretpassword = "password";
+		if(console!=null)
+			secretpassword = new String(System.console().readPassword());
+		else{
+			secretpassword= scanner.nextLine();
+		}
 
 		try { /* set up a key manager for client authentication */
 			SSLSocketFactory factory = null;
 			try {
-				char[] password = "password".toCharArray();
+				char[] password = secretpassword.toCharArray();
 				KeyStore ks = KeyStore.getInstance("JKS");
 				KeyStore ts = KeyStore.getInstance("JKS");
 				KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
@@ -73,6 +82,7 @@ public class Client {
 				ctx.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
 				factory = ctx.getSocketFactory();
 			} catch (Exception e) {
+				scanner.close();
 				throw new IOException(e.getMessage());
 			}
 			SSLSocket socket = (SSLSocket) factory.createSocket(host, port);

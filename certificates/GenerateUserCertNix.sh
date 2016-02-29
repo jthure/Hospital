@@ -5,8 +5,10 @@ echo type division
 read division
 echo type type
 read type
+echo type password
+read pass
 certpath=User
-pass=password
+
 keystore=$username"_keystore"
 truststore=$username"_truststore"
 keytool -genkeypair -keystore $certpath/$keystore -alias $username -dname "CN=$username;O=$type;OU=$division" -storepass $pass -keypass $pass
