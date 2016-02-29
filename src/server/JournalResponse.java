@@ -1,12 +1,23 @@
 package server;
 
+import java.io.IOException;
 import java.util.List;
 
-public class JournalResponse extends Response {
-	private List<Journal> journals;
+import databas.DBHandler;
+import model.Command;
 
-	public JournalResponse(List<Journal> journals) {
-		this.journals = journals;
+public class JournalResponse extends Response {
+	private String msg;
+	
+	
+	public JournalResponse(Command cmd, DBHandler dbh) {
+		try {
+			msg=cmd.execute(dbh);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override

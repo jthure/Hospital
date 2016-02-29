@@ -3,7 +3,8 @@ package model;
 public class CommandFactory {
 
 	public static Command createCommand(String command) throws InvalidCommandException {
-		String[] commandComps = command.split(" ");
+		String[] commandComps = command.split("\\$");
+		System.out.println(commandComps[0]);
 		switch (commandComps[0]) {
 		case ("add"):
 			return new CommandAdd(commandComps);

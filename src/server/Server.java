@@ -27,13 +27,16 @@ import model.InvalidCommandException;
 import model.Nurse;
 import model.Patient;
 import model.User;
+import databas.DBHandler;
 import databas.Logger;
 
 public class Server implements Runnable {
 	private ServerSocket serverSocket = null;
 	private static int numConnectedClients = 0;
 	private static String certPath = "certificates/Server/";
-
+	private static DBHandler db = new DBHandler();
+	
+	
 	public Server(ServerSocket ss) throws IOException {
 		serverSocket = ss;
 		newListener();
@@ -94,7 +97,7 @@ public class Server implements Runnable {
 				}
 				if (cmd != null) {
 					Response response = getData(user, cmd);
-					out.println("Recieved commando: " + clientMsg);
+					out.println("Server response: " + response.response());
 					out.flush();
 					System.out.println("done\n");
 				} else {
@@ -124,7 +127,8 @@ public class Server implements Runnable {
 		if (!allowed) {
 			return new AccessDeniedResponse();
 		}
-		return new JournalResponse(null);
+		
+		return new JournalResponse(cmd, db);
 	}
 
 	private void newListener() {

@@ -77,6 +77,14 @@ public class Journal {
 		return sb.toString();
 	}
 	
+	public String getPnr() {
+		return pNr;
+	}
+	
+	public String getId(){
+		return id;
+	}
+	
 	public static void main(String[] args){
 		PrintWriter pw = null;
 		try {
