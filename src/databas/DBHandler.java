@@ -1,18 +1,17 @@
 package databas;
 
 import server.Journal;
-import server.JournalResponse;
+
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-
-import com.sun.javafx.geom.transform.GeneralTransform3D;
 
 import model.Authority;
 import model.Doctor;
@@ -22,18 +21,31 @@ import model.User;
 
 public class DBHandler {
 
-	HashMap<String, Journal> map;
-	ArrayList<Journal> journalList;
-	FileWriter fw = null;
-	Scanner scan = null;
+	public static final String TABLE_HEADER="Personal number;Journal ID;Patient name;Division;Doctor;Nurse;Data";
+	private String dbFilePath="journal.txt";
+	private HashMap<String, Journal> map;
+	private ArrayList<Journal> journalList;
+	private FileWriter fw = null;
+	private Scanner scan = null;
+
 
 	public DBHandler() {
 		journalList = new ArrayList<>();
 		map = new HashMap<>();
+		if(!Files.exists(Paths.get(dbFilePath))){
+			try {
+				Files.createFile(Paths.get(dbFilePath));
+				Logger.log("Created new database");
+				updateDB();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		try {
-			scan = new Scanner(new File("journal.txt"));
+			scan = new Scanner(new File(dbFilePath));
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+			e.printStackTrace();
 		}
 
 		String info = null;
@@ -57,9 +69,8 @@ public class DBHandler {
 	private void updateDB() {
 		PrintWriter pw = null;
 		try {
-			pw = new PrintWriter("journal.txt");
+			pw = new PrintWriter(dbFilePath);
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 		pw.println("Pnr;id;name;division;doctor;nurse;data");
 		for (Journal j : map.values()) {
@@ -126,9 +137,9 @@ public class DBHandler {
 		}
 		map.put(journal.getId(), journal);
 		try {
-			fw = new FileWriter(new File("journal.txt"), true);
+			fw = new FileWriter(new File(dbFilePath), true);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		fw.write("\n" + journal.toString());
 		fw.close();

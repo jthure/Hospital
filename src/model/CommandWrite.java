@@ -35,7 +35,7 @@ public class CommandWrite extends Command {
 
 	
 	@Override
-	Commands getCommand() {
+	public Commands getCommand() {
 		return Commands.WRITE;
 	}
 
@@ -44,8 +44,8 @@ public class CommandWrite extends Command {
 		boolean append = Boolean.parseBoolean(command[3]);
 		boolean result = dbh.write(command[1], command[2], user, append);
 		if(result)
-			return "Journal successfully added";
-		return "Journal was not added";
+			return "Journal successfully modified";
+		return "Journal was not modified";
 	}
 	
 }

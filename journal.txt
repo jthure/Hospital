@@ -1,3 +1,1 @@
 Pnr;id;name;division;doctor;nurse;data
-9202192978;1;Patient1;Division1;Doctor1;Nurse1;han har kli + Kan vara HIV
-9202192978;2;Patient1;Division1;Doctor1;Nurse2;han är botad

@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.security.KeyStore;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.net.ssl.KeyManagerFactory;
@@ -17,6 +20,8 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
 import javax.security.cert.X509Certificate;
 
+import databas.DBHandler;
+import dnl.utils.text.table.TextTable;
 import model.Command;
 import model.CommandFactory;
 import model.InvalidCommandException;
@@ -122,14 +127,29 @@ public class Client {
 					System.out.println(e.getMessage());
 				}
 				if (cmd != null) {
-					System.out.print("sending '" + cmd.toString() + "' to server...");
+					//System.out.print("sending '" + cmd.toString() + "' to server...");
 					out.println(cmd.toString());
 					out.flush();
 					System.out.println("done");
 					System.out.println("Server response:");
-					do{
-						System.out.println(in.readLine());
-					}while(in.ready());
+					if(cmd.getCommand().equals(Command.Commands.READ)) {
+						String[] colNames = DBHandler.TABLE_HEADER.split(";");
+						List<String[]> data = new ArrayList<>();
+						do {
+							data.add(in.readLine().split(";"));
+						} while (in.ready());
+						String[][] dataTable = new String[colNames.length][data.size()];
+						for (int i = 0; i < data.size(); i++) {
+							dataTable[i] = data.get(i);
+						}
+						TextTable tt = new TextTable(colNames, dataTable);
+						tt.printTable();
+					}else{
+						do {
+							System.out.println(in.readLine());
+						} while (in.ready());
+					}
+
 				}
 				
 			}

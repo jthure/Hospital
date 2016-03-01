@@ -33,7 +33,7 @@ public class Logger {
 			writer.flush();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 	}
@@ -48,10 +48,10 @@ public class Logger {
 	}
 	public static void commandEntered(String user, String command) {
 
-		log("Command:\t" + "Username: " + user + " Command: " + command);
+		log("Command:\t" + "Username: " + user + " Command: " + command.replace("$"," "));
 	}
 	public static void invalidCommandEntered(String user, String command) {
 
-		log("InvalidCommand:\t" + "Username: " + user + " Command: " + command);
+		log("InvalidCommand:\t" + "Username: " + user + " Command: " + command.replace("$"," "));
 	}
 }

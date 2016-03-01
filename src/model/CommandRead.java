@@ -26,19 +26,19 @@ public class CommandRead extends Command {
 		Scanner scan = new Scanner(System.in);
 		String[] info = new String[LENGTH];
 		info[0] = "read";
-		System.out.print("Name or pnr of patient: ");
+		System.out.print("Personal number of patient or journal ID: ");
 		info[1] = scan.nextLine();
 		return info;
 		
 	}
 	
 	@Override
-	Commands getCommand() {
+	public Commands getCommand() {
 		return Commands.READ;
 	}
 
 	public String execute(DBHandler dbh, User user)  throws IOException{
-		return listOfJournalsToString(dbh.read(command[1], user)).replace(";", " ");
+		return listOfJournalsToString(dbh.read(command[1], user));
 	
 	}
 }

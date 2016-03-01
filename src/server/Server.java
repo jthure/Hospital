@@ -34,7 +34,7 @@ public class Server implements Runnable {
 	private ServerSocket serverSocket = null;
 	private static int numConnectedClients = 0;
 	private static String certPath = "certificates/Server/";
-	private static DBHandler db = new DBHandler();
+	private static DBHandler db;
 
 	public Server(ServerSocket ss) throws IOException {
 		serverSocket = ss;
@@ -70,9 +70,8 @@ public class Server implements Runnable {
 				user = new Authority(info[0]);
 				break;
 			default:
+				Logger.log("Invalid user type in certificate");
 				throw new InvalidUserException("Invalid user type in certificate");
-				// Log
-
 			}
 
 			System.out.println("client connected");
@@ -118,7 +117,7 @@ public class Server implements Runnable {
 			e.printStackTrace();
 			return;
 		} catch (InvalidUserException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
@@ -144,6 +143,7 @@ public class Server implements Runnable {
 	public static void main(String args[]) {
 		System.out.println("\nServer Started\n");
 		Logger.init();
+		db = new DBHandler();
 		Logger.log("Server started");
 		int port = -1;
 		if (args.length >= 1) {

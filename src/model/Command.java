@@ -32,9 +32,9 @@ public abstract class Command {
 		return sb.toString();
 	}
 	
-	abstract Commands getCommand();
+	public abstract Commands getCommand();
 	
-	enum Commands{
+	public enum Commands{
 		READ,WRITE,DELETE,CREATE
 	}
 	protected String listOfJournalsToString(List<Journal> journals){

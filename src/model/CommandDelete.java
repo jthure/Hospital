@@ -30,11 +30,10 @@ public class CommandDelete extends Command {
 	}
 	
 	@Override
-	Commands getCommand() {
+	public Commands getCommand() {
 		return Commands.DELETE;
 	}
 	
-	//ToDo
 	public String execute(DBHandler dbh, User user)  throws IOException{
 		boolean result = dbh.delete(command[1]);
 		if(result)
