@@ -9,7 +9,7 @@ out/*
 .idea/uiDesigner.xml
 .idea/*
 # Package Files #
-*.jar
+
 *.war
 *.ear
 

@@ -117,7 +117,7 @@ public class Server implements Runnable {
 			e.printStackTrace();
 			return;
 		} catch (InvalidUserException e) {
-			
+
 			e.printStackTrace();
 		}
 	}
