@@ -1,3 +1,0 @@
-2016-02-29_21:05:30	Created new database
-2016-02-29_21:05:30	Server started
-2016-02-29_21:06:22	Server started
